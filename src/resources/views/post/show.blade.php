@@ -11,14 +11,15 @@
         <div class="max-w-7xl mx-auto pb-3 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    投稿者1(迷える子羊1)
+                    {{ $post->user->name }}
+                    {{ $post->created_at }}
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ $post->title }}<br>
                     {{ $post->response }}
                 </div>
                 <div class="p-6">
-                    <div>
+                    <div class="flex justify-end space-x-4">
                         <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">お気に入り</a>
                         <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">編集</a>
                         <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post">

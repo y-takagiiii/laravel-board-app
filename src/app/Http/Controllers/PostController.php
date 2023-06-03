@@ -12,12 +12,23 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::orderByDesc('created_at')
-        ->with('user')
-        ->get();
-        return view('post.index', compact('posts'));
+        $keyword = $request->input('keyword');
+        $query = Post::query('keyword');
+
+        if(isset($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
+            ->orWhere('response', 'LIKE', "%{$keyword}%");
+            $posts = $query->get();
+            return view('post.index', compact('posts', 'keyword'));
+        } else {
+            $posts = Post::orderByDesc('created_at')
+            ->with('user')
+            ->get();
+            return view('post.index', compact('posts'));
+        }
+
     }
 
     /**

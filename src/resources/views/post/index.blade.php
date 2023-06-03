@@ -20,14 +20,13 @@
                     {{ $post->response }}
                 </div>
                 <div class="p-6">
-                    <div>
+                    <div class="flex justify-end space-x-4">
                         <a href="{{ route('post.show', ['post' => $post->id]) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">詳細</a>
                         <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">編集</a>
                         <form method="post" action="{{ route('post.destroy', ['post' => $post->id]) }}" >
                             @csrf
                             @method('delete')
                             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">削除</button>
-                            {{-- <x-secondary-button>削除</x-secondary-button> --}}
                         </form>
                     </div>
                 </div>

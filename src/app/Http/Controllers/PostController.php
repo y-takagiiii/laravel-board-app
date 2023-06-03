@@ -14,7 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::orderByDesc('created_at')
+        ->with('user')
+        ->get();
+        return view('post.index', compact('posts'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -35,7 +38,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:50',
+            'response' => 'required',
+        ]);
+
+        $post = new Post();
+        $post->title = $validated['title'];
+        $post->response = $validated['response'];
+        $post->user_id = auth()->user()->id;
+        $post->save();
+
+        return to_route('post.index')->with('message', '投稿しました');
     }
 
     /**
@@ -46,7 +60,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('post.show', compact('post'));
     }
 
     /**
@@ -57,7 +71,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -69,7 +83,16 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:50',
+            'response' => 'required',
+        ]);
+
+        $post->title = $validated['title'];
+        $post->response = $validated['response'];
+        $post->save();
+
+        return to_route('post.show', compact('post'))->with('message', '更新しました');
     }
 
     /**
@@ -80,6 +103,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return to_route('post.index')->with('message', '削除しました');
     }
 }

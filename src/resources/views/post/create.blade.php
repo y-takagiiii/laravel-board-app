@@ -19,15 +19,19 @@
                                     <div class="flex flex-wrap -m-2">
                                         <div class="p-2 w-full">
                                             <div class="relative">
-                                                <label for="title" class="leading-7 text-sm text-gray-600">タイトル</label>
-                                                <textarea id="title" name="title" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-16 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('title') }}</textarea>
+                                                <label for="title" class="leading-7 text-sm text-gray-600">懺悔したいこと</label>
+                                                <textarea id="repentance" name="title" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-16 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('title') }}@isset($inputText) {{ $inputText }} @endisset</textarea>
                                             </div>
                                         </div>
 
                                         <div class="p-2 w-full">
+                                            <input type="button" value="懺悔する" id="repentance_btn" class="flex mx-auto bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                                        </div>
+
+                                        <div class="p-2 w-full">
                                             <div class="relative">
-                                                <label for="response" class="leading-7 text-sm text-gray-600">レスポンス</label>
-                                                <textarea id="response" name="response" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('response') }}</textarea>
+                                                <label for="response" class="leading-7 text-sm text-gray-600">神からのお告げ</label>
+                                                <textarea id="response" name="response" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('response') }}@isset($responseText) {{ $responseText }} @endisset</textarea>
                                             </div>
                                         </div>
 
@@ -43,5 +47,8 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/generate-text.js') }}"></script>
+
 </x-app-layout>
 

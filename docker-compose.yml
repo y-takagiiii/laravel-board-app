@@ -14,7 +14,7 @@ services:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
     ports:
-      - 80:80
+      - 81:80
     volumes:
       - ./src/:/app
     working_dir: /var/www

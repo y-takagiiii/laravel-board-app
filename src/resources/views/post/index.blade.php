@@ -17,8 +17,8 @@
                     {{ $post->created_at }}
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ $post->title }}<br>
-                    {{ $post->response }}
+                    <div>{{ $post->title }}</div><br>
+                    <div>{{ $post->response }}</div>
                 </div>
                 <div class="p-6">
                     <div class="flex justify-end space-x-4">

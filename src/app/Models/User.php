@@ -50,4 +50,16 @@ class User extends Authenticatable
     public function favorites() {
         return $this->hasMany(Favorite::class);
     }
+
+    public function favorites_posts() {
+        return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id')->withTimestamps();
+    }
+
+    public function my_posted($post_id) {
+        return $this->posts()->where('id', $post_id)->exists();
+    }
+
+    public function favorited_post($post_id) {
+        return $this->favorites_posts()->where('post_id', $post_id)->exists();
+    }
 }

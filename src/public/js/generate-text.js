@@ -1,9 +1,11 @@
 const repentanceBtn = document.getElementById('repentance_btn');
 const responseTextArea = document.getElementById('response');
+const loadingIcon = document.getElementById('loading-icon');
 
 repentanceBtn.addEventListener('click', () => {
     const repentanceValue = document.getElementById('repentance').value;
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    loadingIcon.classList.remove('hidden');
 
     fetch('/chatgpt', {
         method: 'POST',
@@ -13,6 +15,7 @@ repentanceBtn.addEventListener('click', () => {
         },
         body: JSON.stringify({ title: repentanceValue })
     }).then(response => {
+        loadingIcon.classList.add('hidden');
         if (response.ok) {
             return response.json();
         } else {
@@ -24,4 +27,3 @@ repentanceBtn.addEventListener('click', () => {
         console.log(error);
     });
 });
-

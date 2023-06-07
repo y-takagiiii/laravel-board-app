@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ChatgptController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -34,5 +35,9 @@ Route::resource('post', PostController::class)
 ->middleware(['auth', 'verified']);
 
 Route::post('/chatgpt', [ChatgptController::class, 'getResponse'])->name('chatgpt');
+
+Route::post('post/{post_id}', [FavoriteController::class, 'store'])->name('favorite');
+
+Route::delete('post/{post_id}', [FavoriteController::class, 'destroy'])->name('unfavorite');
 
 require __DIR__.'/auth.php';

@@ -52,7 +52,7 @@ class User extends Authenticatable
     }
 
     public function favorites_posts() {
-        return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id')->withTimestamps();
+        return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id');
     }
 
     public function my_posted($post_id) {
@@ -61,5 +61,6 @@ class User extends Authenticatable
 
     public function favorited_post($post_id) {
         return $this->favorites_posts()->where('post_id', $post_id)->exists();
+        // dd($this->favorites_posts()->where('post_id', $post_id));
     }
 }

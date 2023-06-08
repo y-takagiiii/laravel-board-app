@@ -36,8 +36,9 @@ Route::resource('post', PostController::class)
 
 Route::post('/chatgpt', [ChatgptController::class, 'getResponse'])->name('chatgpt');
 
-Route::post('post/{post_id}', [FavoriteController::class, 'store'])->name('favorite');
 
-Route::delete('post/{post_id}', [FavoriteController::class, 'destroy'])->name('unfavorite');
+Route::get('favorite', [FavoriteController::class, 'index'])->name('favorite_post');
+Route::post('favorite/{post_id}', [FavoriteController::class, 'store'])->name('favorite');
+Route::delete('favorite/{post_id}', [FavoriteController::class, 'destroy'])->name('unfavorite');
 
 require __DIR__.'/auth.php';

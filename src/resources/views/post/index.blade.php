@@ -28,7 +28,7 @@
                             <form method="post" action="{{ route('post.destroy', ['post' => $post->id]) }}" >
                                 @csrf
                                 @method('delete')
-                                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">削除</button>
+                                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick="return confirm('本当に削除しますか?');">削除</button>
                             </form>
                         @else
                             @if (Auth::user()->favorited_post($post->id))

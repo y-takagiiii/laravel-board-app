@@ -25,7 +25,8 @@
                         <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">編集</a>
                         <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post">
                             @csrf
-                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">削除</button>
+                            @method('delete')
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick="return confirm('本当に削除しますか?');">削除</button>
                         </form>
                         @else
                             @if (Auth::user()->favorited_post($post->id))

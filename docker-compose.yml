@@ -2,28 +2,24 @@ version: '3'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: ./docker/php/Dockerfile
+    build: ./docker/php/
+
     ports:
       - "5173:5173"
     volumes:
       - ./src:/app
+    depends_on:
+      - db
   nginx:
-    build:
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
+    build: ./docker/nginx/
     ports:
       - 81:80
     volumes:
       - ./src/:/app
-    working_dir: /var/www
     depends_on:
       - app
   db:
-    build:
-      context: .
-      dockerfile: ./docker/db/Dockerfile
+    build: ./docker/db
     ports:
       - 3306:3306
     volumes:

@@ -33,11 +33,19 @@ class ProfileController extends Controller
         }
 
         $profile_image_path = null;
-        if ($request->hasFile('profile_image')) {
-            $profile_image_path = $request->file('profile_image')
-            ->store('pforile-icons', 'public');
-            $request->user()->profile_image = $profile_image_path;
+        if (app()->isLocal() || app()->runningUnitTests()) {
+            if ($request->hasFile('profile_image')) {
+                $profile_image_path = $request->file('profile_image')
+                ->store('pforile-icons', 'public');
+                $request->user()->profile_image = $profile_image_path;
+            }
+        } else {
+            if ($request->hasFile('profile_image')) {
+                $profile_image_path = Storage::disk('s3')
+                ->put('/', $request->file('profile_image'));
+                $request->user()->profile_image = $profile_image_path;
         }
+
 
         $request->user()->save();
 

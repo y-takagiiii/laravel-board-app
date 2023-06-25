@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -44,6 +45,7 @@ class ProfileController extends Controller
                 $profile_image_path = Storage::disk('s3')
                 ->put('/', $request->file('profile_image'));
                 $request->user()->profile_image = $profile_image_path;
+            }
         }
 
 

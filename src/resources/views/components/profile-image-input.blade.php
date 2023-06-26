@@ -1,6 +1,10 @@
 <div class="flex mb-4" x-data="picturePreview()">
     <div class="mr-3">
-        <img id="preview" src="{{ isset(Auth::user()->profile_image) ? asset('storage/' . Auth::user()->profile_image) : asset('images/user_icon.png') }}" class="w-16 h-16 rounded-full object-cover border-none bg-gray-200">
+        @if (App::environment('local'))
+            <img id="preview" src="{{ isset(Auth::user()->profile_image) ? asset('storage/' . Auth::user()->profile_image) : asset('images/user_icon.png') }}" class="w-16 h-16 rounded-full object-cover border-none bg-gray-200">
+        @else
+            <img id="preview" src="{{ isset(Auth::user()->profile_image) ? Storage::disk('s3')->url(Auth::user()->profile_image) : asset('images/user_icon.png') }}" class="w-16 h-16 rounded-full object-cover border-none bg-gray-200">
+        @endif
     </div>
     <div class="flex items-center">
         <button
